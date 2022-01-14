@@ -3,6 +3,43 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
+
+  <servlet>
+    <servlet-name>testEndpoint</servlet-name>
+    <servlet-class>com.kosuke.rssbot.controller.testEndpoint</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>events</servlet-name>
+    <servlet-class>com.kosuke.rssbot.controller.events</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>UpdateCheck</servlet-name>
+    <servlet-class>com.kosuke.rssbot.controller.UpdateCheck</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>UpdateCheck</servlet-name>
+    <url-pattern>/UpdateCheck</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>testEndpoint</servlet-name>
+    <url-pattern>/testEndpoint</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>events</servlet-name>
+    <url-pattern>/events/*</url-pattern>
+  </servlet-mapping>
+  
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>UpdateCheck</web-resource-name>
+      <url-pattern>/UpdateCheck</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
