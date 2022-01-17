@@ -1,0 +1,4 @@
+cron:
+- url: '/checkUpdate'
+  schedule: 'every 1 hours'
+  timezone: 'Asia/Tokyo'
