@@ -28,20 +28,23 @@ public class checkUpdate extends HttpServlet {
 
 		log.info("LOG checkUpdate start");
 		DatastoreDAO dao = new DatastoreDAO();
+
 		// get all Feeds
 		List<T_Feed> feedsList = dao.getAllFeeds();
 		List<T_Feed> newfeedsList = new ArrayList<T_Feed>();
 
 		for(T_Feed f : feedsList){
+			log.info("LOG feed: " + f.getUrl());
+
 			// purse rss
 			SyndFeedInput input = new SyndFeedInput();
 			SyndFeed feed = null;
 			try {
 				feed = input.build(new XmlReader(new URL(f.getUrl())));
 			} catch (Exception e) {
-				e.printStackTrace();
 				log.info("LOG Error :"+ e.toString());
 				log.info("LOG Error :"+ f.getUrl());
+				continue;
 			}
 
 			//更新を確認する
