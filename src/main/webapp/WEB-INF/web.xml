@@ -13,13 +13,13 @@
     <servlet-class>com.kosuke.rssbot.controller.events</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>UpdateCheck</servlet-name>
-    <servlet-class>com.kosuke.rssbot.controller.UpdateCheck</servlet-class>
+    <servlet-name>checkUpdate</servlet-name>
+    <servlet-class>com.kosuke.rssbot.controller.checkUpdate</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>UpdateCheck</servlet-name>
-    <url-pattern>/UpdateCheck</url-pattern>
+    <servlet-name>checkUpdate</servlet-name>
+    <url-pattern>/checkUpdate</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>testEndpoint</servlet-name>
@@ -29,11 +29,11 @@
     <servlet-name>events</servlet-name>
     <url-pattern>/events/*</url-pattern>
   </servlet-mapping>
-  
+
   <security-constraint>
     <web-resource-collection>
-      <web-resource-name>UpdateCheck</web-resource-name>
-      <url-pattern>/UpdateCheck</url-pattern>
+      <web-resource-name>checkUpdate</web-resource-name>
+      <url-pattern>/checkUpdate</url-pattern>
     </web-resource-collection>
     <auth-constraint>
         <role-name>admin</role-name>

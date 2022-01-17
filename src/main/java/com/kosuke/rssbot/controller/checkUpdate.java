@@ -20,13 +20,13 @@ import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
 @SuppressWarnings("serial")
-public class UpdateCheck extends HttpServlet {
+public class checkUpdate extends HttpServlet {
 
-	private static final Logger log = Logger.getLogger(UpdateCheck.class.getName());
+	private static final Logger log = Logger.getLogger(checkUpdate.class.getName());
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
-		log.info("LOG UpdateCheck start");
+		log.info("LOG checkUpdate start");
 		DatastoreDAO dao = new DatastoreDAO();
 		// get all Feeds
 		List<T_Feed> feedsList = dao.getAllFeeds();
@@ -43,11 +43,11 @@ public class UpdateCheck extends HttpServlet {
 				log.info("LOG Error :"+ e.toString());
 				log.info("LOG Error :"+ f.getUrl());
 			}
-			
+
 			//更新を確認する
 			UpdatedEntries updatesMap = f.checkUpdates(feed);
 			List<SyndEntry> updatesList = updatesMap.getEntrylist();
-			
+
 			for(SyndEntry entry : updatesList){
 				if(f.getTarget().equals("L")){ //target=Lの場合：更新があったらLINEで通知する
 					String channelId = dao.getChannelIdByUserid(f.getUserId());
@@ -60,10 +60,10 @@ public class UpdateCheck extends HttpServlet {
 					M_Twitter twitterProperty = dao.getTwitterPropertyByToken(accessToken);
 
 					Util.sendUpdateTwieet(f.getUserId(), feed.getTitle(), entry.getTitle(), entry.getLink(), twitterProperty);
-					
+
 				}
 			}
-			
+
 			if(updatesList.size() > 0){
 				T_Feed newfeed = new T_Feed(f.getKey(), f.getUserId(), f.getUrl(), updatesMap.getLastmodified(), f.getTarget());
 				newfeedsList.add(newfeed);
